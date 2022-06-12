@@ -1,5 +1,5 @@
 import { Home, Login, ProductsDetailed, Purchases, Cart, User } from './pages';
-import { Navbar, LoadingScreen } from './components/index'
+import { Navbar, LoadingScreen, ProtectedRoutes } from './components/index'
 import Container from 'react-bootstrap/Container';
 import './App.css';
 import { HashRouter, Route, Routes } from 'react-router-dom';
@@ -19,9 +19,12 @@ function App() {
           <Route path='/' element={ <Home /> } />
           <Route path='/login' element={ <Login /> } />
           <Route path='/products/:id' element={ <ProductsDetailed /> } />
-          <Route path='/purchases' element={ <Purchases /> } />
           <Route path='/cart' element={ <Cart /> } />
           <Route path='/user' element={ <User /> } />
+
+          <Route element={ <ProtectedRoutes /> }>
+            <Route path='/purchases' element={ <Purchases /> } />
+          </Route>
         </Routes>
       </Container>
     </HashRouter>

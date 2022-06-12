@@ -17,7 +17,7 @@ const Home = () => {
     useEffect( ( ) => {
         dispatch( getHome( ) )
 
-        axios.get( 'https://ecommerce-api-react.herokuapp.com/api/v1/products/categories' )
+        axios.get('https://ecommerce-api-react.herokuapp.com/api/v1/products/categories')
             .then( res => setCategories( res.data.data.categories ) )
 
     }, [dispatch] )
@@ -39,6 +39,7 @@ const Home = () => {
                     categories.map( category => (
                         <li 
                             className="list-group-item" 
+                            style={ { cursor: "pointer" } }
                             key={ category.id }
                             onClick={ ( ) => selectCategory( category.id ) }>
                                 { category.name }
@@ -64,16 +65,31 @@ const Home = () => {
                     >Search</button>
             </div>
 
-                    <div className="row row-cols-1 row-cols-md-3 g-4">
+                    <div 
+                        className="row row-cols-1 row-cols-md-3 g-4">
                         {
                             products.map( product => (
                                 
-                                <div className="col" key={ product.id } onClick={ ( ) => navigate( `/products/${ product.id }` ) }>
-                                    <div className="card h-100">
-                                        <img src={ product.productImgs[0] } className="card-img-top img-fuid" alt="" />
-                                        <div className="card-body">
-                                            <h5 className="card-title">{ product.title }</h5>
-                                            <p className="card-text">{ product.description }</p>
+                                <div 
+                                    className="col" 
+                                    key={ product.id } 
+                                    onClick={ ( ) => navigate( `/products/${ product.id }` ) }>
+                                    <div 
+                                        className="card h-100">
+                                        <img 
+                                            src={ product.productImgs[0] } 
+                                            className="rounded" 
+                                            alt="" />
+                                        <div 
+                                            className="card-body">
+                                            <h5 
+                                                className="card-title">
+                                                    { product.title }
+                                            </h5>
+                                            <p 
+                                                className="card-text">
+                                                    { product.description }
+                                            </p>
                                         </div>
                                         <div className="card-footer">
                                             <small className="text-muted"><b>Price: </b>{ product.price }</small>
