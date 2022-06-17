@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'
 import {  useDispatch, useSelector } from 'react-redux'
 import { filterCategories } from '../store/slices/home.slice'
+import { addToCart } from '../store/slices/cart.slice';
 
 const ProductsDetailed = () => {
 
     
     const [ detailed, setDetailed ] = useState( {} )
+    const [ quantity, setQuantity ] = useState( "" )
     
     const { id } = useParams( {} )
     const dispatch = useDispatch()
@@ -30,7 +32,16 @@ const ProductsDetailed = () => {
          
    }, [dispatch, id] )
 
-    console.log( detailed )
+   const addProduct = ( ) => {
+        const product = {
+            id: id,
+            quantity: quantity,
+        }
+        dispatch( addToCart( product ) )
+        //console.log( product )
+   }
+
+    //console.log( detailed )
     //console.log( listDetailed )
 
     return (
@@ -52,10 +63,20 @@ const ProductsDetailed = () => {
                         className="card-text">
                             { detailed.description }.</p>
                 </div>
-                <div className="card-footer">
-                    <small 
-                        className="text-muted"><b>Price: </b>
-                        { detailed.price }</small>
+                <div className="card-footer row">
+                    <div className='col-sm-5'>
+                        <small 
+                            className="text-muted"><b>Price: </b>
+                            { detailed.price }
+                        </small>
+                    </div>
+                    <div className='col-sm-7'>
+                        <input 
+                            type="number" 
+                            onChange={ e => setQuantity( e.target.value ) } 
+                            value={ quantity } />
+                        <button onClick={ addProduct }>Add to cart</button>
+                    </div>
                 </div>
             </div>
 

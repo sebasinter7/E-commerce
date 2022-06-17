@@ -28,9 +28,13 @@ const Purchases = ( ) => {
             <Card.Body>
               {purchased.cart?.products.map((purchase) => (
                 <>
-                  <Card.Title onClick={ ( ) => navigate( `/products/${ purchase.id }` ) } key={ purchase.id }>{purchase.title}</Card.Title>
+                  <Card.Title 
+                    onClick={ ( ) => navigate( `/products/${ purchase.id }` ) } 
+                    key={ purchase.id }>
+                      {purchase.title}
+                  </Card.Title>
                   <Card.Text>
-                    <b>Pice: </b>
+                    <b>Price: </b>
                     {purchase.price}
                   </Card.Text>
                 </>
